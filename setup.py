@@ -25,6 +25,7 @@ setup(
     install_requires=install_requires,
     extras_require={
         'test': ['nose', 'coverage'],
+        'postgres': ['psycopg2'],
     },
     entry_points={
         'console_scripts': [
