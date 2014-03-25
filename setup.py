@@ -12,6 +12,8 @@ from setuptools import setup, find_packages
 install_requires = [
     'flask',
     'flask-sqlalchemy',
+    'pyopenssl',
+    'pwm',
 ]
 
 setup(
@@ -29,7 +31,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'pwm-server = pwm_server:serve',
+            'pwm-server = pwm_server.cli:serve',
         ]
     },
     package_data={
