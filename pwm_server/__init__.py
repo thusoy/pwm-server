@@ -1,7 +1,6 @@
-from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
+from . import views
 
-db = SQLAlchemy()
+from flask import Flask
 
 def create_app(config_File=None):
     app = Flask(__name__)
@@ -10,10 +9,6 @@ def create_app(config_File=None):
         app.config.from_pyfile(config_File)
     else:
         app.config.from_envvar('PWM_CONFIG_FILE')
-
-    db.init_app(app)
-
-    from . import views
 
     app.register_blueprint(views.mod)
 
