@@ -8,7 +8,7 @@ def create_app(config_File=None):
     if config_File:
         app.config.from_pyfile(config_File)
     else:
-        app.config.from_envvar('PWM_CONFIG_FILE')
+        app.config.from_envvar('PWM_SERVER_CONFIG_FILE')
 
     app.register_blueprint(views.mod)
 

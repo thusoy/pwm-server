@@ -1,5 +1,6 @@
-from . import create_app, db
+from . import create_app
 
+from pwm import PWM
 import argparse
 import sys
 
@@ -21,6 +22,10 @@ def parse_args():
         action='store_true',
         help='Print this help message and exit',
     )
+    argparser.add_argument('-c', '--config-file',
+        metavar='<config-file>',
+        help='Location of config file to use.',
+    )
     args = argparser.parse_args()
     if args.help:
         argparser.print_help()
@@ -32,5 +37,6 @@ def serve():
     args = parse_args()
     app = create_app(args.config_file)
     with app.app_context():
-        db.create_all()
+        pwm = PWM()
+        pwm.bootstrap(app.config['SQLALCHEMY_DATABASE_URI'])
     app.run(debug=args.debug, host=args.host, port=args.port)
