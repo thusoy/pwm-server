@@ -50,3 +50,19 @@ server {
 ```
 
 You can now add `https://pwm.example.com` to your pwm config, and you'll have your own, self-hosted password manager running.
+
+
+Development
+-----------
+
+Run the unit tests to make sure you don't break anything - keep the test coverage up.
+
+To test the integration, add pwm.local to your hosts config, and start the virtual machine with the
+web servers configured:
+
+    $ vagrant up
+
+This should start a VM with nginx, lighttpd and apache installed, running on port 80, 81 and 82, respectively.
+
+Make sure everything works on all the web servers, their configuration can be found in
+vagrant/salt/<web-server>.

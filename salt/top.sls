@@ -1,0 +1,5 @@
+base:
+    '*':
+        - apache
+        - lighttpd
+        - nginx
