@@ -19,8 +19,6 @@ Start the server:
 
     $ pwm-server
 
-Currently there can only be one user per server, but that will change...
-
 
 Configuration
 -------------
@@ -64,18 +62,36 @@ password manager running.
 Development
 -----------
 
-Run the unit tests to make sure you don't break anything - keep the test coverage up.
+Install the package and the test requirements:
 
-To test the integration, add pwm.local to your hosts config, and start the virtual machine with the
-web servers configured:
+    $ virtualenv venv
+    $ . venv/bin/activate
+    $ pip install -e .[test]
+
+Keep test coverage up with unit tests, run them like this:
+
+    $ nosetests pwm_server
+
+To run the integration tests, which also tests the web server config and SSL handling, add
+pwm.local to your hosts config, and start the virtual machine:
 
     $ vagrant up
 
-This should start a VM with nginx, lighttpd and apache installed, running on port 8000, 8001 and
-8002, respectively.
+This should start a VM with nginx, <del>lighttpd</del><sup>1</sup> and <del>apache</del><sup>2</sup> installed, running on
+port 8000, 8001 and 8002, respectively.
+
+Run the integration test suite against any of them like this:
+
+    $ PWM_SERVER_TEST_URI=https://pwm.local:8000 nosetests integration_tests
 
 Make sure everything works on all the web servers, their configuration can be found in
 vagrant/salt/<web-server>.
+
+<sup>1</sup>: We're not certain if it's possible to configure lighttpd to verify cetificates as a
+self-signed CA, until that is confirmed lighttpd is put on hold.
+
+<sup>2</sup>: Apache support will be added soon. Note that it might still work, we just haven't
+tested it yet. Pull requests welcome! 
 
 ### Vagrant tips
 
