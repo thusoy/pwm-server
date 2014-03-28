@@ -19,9 +19,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder "salt", "/srv/salt"
 
   # Forward ports to the different webservers
-  config.vm.network "forwarded_port", guest: 80, host: 8000
-  config.vm.network "forwarded_port", guest: 81, host: 8001
-  config.vm.network "forwarded_port", guest: 82, host: 8002
+  config.vm.network "forwarded_port", guest: 443, host: 8000
+  config.vm.network "forwarded_port", guest: 444, host: 8001
+  config.vm.network "forwarded_port", guest: 445, host: 8002
 
   config.vm.provision :salt do |salt|
     salt.minion_config = "salt/minion"
