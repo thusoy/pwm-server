@@ -26,6 +26,7 @@ pwm-server-virtualenv:
 pwm-server:
     pip.installed:
         - name: /vagrant
+        - upgrade: True
         - bin_env: /srv/pwm-server/venv
         - require:
             - virtualenv: pwm-server-virtualenv
@@ -33,6 +34,8 @@ pwm-server:
 
     service.running:
         - watch:
+            - pip: pwm-server
+            - file: pwm-server-config
             - file: pwm-server-job
 
 
