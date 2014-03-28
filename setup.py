@@ -26,7 +26,7 @@ setup(
     packages=find_packages(),
     install_requires=install_requires,
     extras_require={
-        'test': ['nose', 'coverage'],
+        'test': ['nose', 'coverage', 'requests'],
         'postgres': ['psycopg2'],
     },
     entry_points={
