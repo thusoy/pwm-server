@@ -13,7 +13,6 @@ from setuptools import setup, find_packages
 install_requires = [
     'flask',
     'flask-sqlalchemy',
-    'pyopenssl',
     'pwm',
 ]
 
