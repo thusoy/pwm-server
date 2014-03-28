@@ -2,6 +2,7 @@ from . import create_app
 
 from pwm import PWM
 import argparse
+import logging
 import sys
 
 def parse_args():
@@ -26,6 +27,10 @@ def parse_args():
         metavar='<config-file>',
         help='Location of config file to use.',
     )
+    argparser.add_argument('-v', '--verbose',
+        action='store_true',
+        help='Increase verbosity',
+    )
     args = argparser.parse_args()
     if args.help:
         argparser.print_help()
@@ -34,9 +39,28 @@ def parse_args():
 
 
 def serve():
+    """ Entry point for the CLI.
+
+    Bootstrap a new database first if necessary, then start the webserver.
+    """
     args = parse_args()
+    _init_logging(args.verbose)
     app = create_app(args.config_file)
     with app.app_context():
         pwm = PWM()
         pwm.bootstrap(app.config['SQLALCHEMY_DATABASE_URI'])
     app.run(debug=args.debug, host=args.host, port=args.port)
+
+
+def _init_logging(verbose=False):
+    """ Configure loggers. """
+    level = logging.DEBUG if verbose else logging.WARNING
+    sysout_handler = logging.StreamHandler(sys.stdout)
+    sysout_handler.setLevel(level)
+
+    pwm_logger = logging.getLogger('pwm')
+    pwm_logger.setLevel(level)
+    pwm_logger.addHandler(sysout_handler)
+    pwm_server_logger = logging.getLogger('pwm_server')
+    pwm_server_logger.setLevel(level)
+    pwm_server_logger.addHandler(sysout_handler)
