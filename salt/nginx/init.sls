@@ -14,7 +14,7 @@ nginx-sites-enabled:
         - clean: True
 
 
-nginx-ssl-keys:
-    file.recurse:
+nginx-ca:
+    file.symlink:
         - name: /etc/nginx/ssl
-        - source: salt://nginx/ssl
+        - target: /srv/ca

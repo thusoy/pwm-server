@@ -1,3 +1,23 @@
+pip:
+    pkg.installed:
+        - name: python-pip
+
+    pip.installed:
+        - upgrade: True
+        - require:
+            - pkg: pip
+
+
+virtualenv:
+    pip.installed:
+        - require:
+            - pip: pip
+
+
+python-dev:
+    pkg.installed
+
+
 pwm-server-virtualenv:
     virtualenv.managed:
         - name: /srv/pwm-server/venv
@@ -9,6 +29,7 @@ pwm-server:
         - bin_env: /srv/pwm-server/venv
         - require:
             - virtualenv: pwm-server-virtualenv
+            - pkg: python-dev
 
     service.running:
         - watch:
