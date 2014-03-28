@@ -62,7 +62,14 @@ web servers configured:
 
     $ vagrant up
 
-This should start a VM with nginx, lighttpd and apache installed, running on port 80, 81 and 82, respectively.
+This should start a VM with nginx, lighttpd and apache installed, running on port 8000, 8001 and 8002, respectively. 
 
 Make sure everything works on all the web servers, their configuration can be found in
 vagrant/salt/<web-server>.
+
+### Vagrant tips
+
+Instead of running `vagrant provision` every time you change something in the config, instead of
+re-running the entire provisioning you can rerun just the parts you are working on from inside the
+VM. Log on with vagrant:vagrant (port 2222), and run `sudo salt-call state.sls <state>` to run only
+one salt state.
