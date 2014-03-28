@@ -11,9 +11,9 @@ server {
     charset utf-8;
 
     ssl on;
-    ssl_certificate ssl/pwm.local.crt;
-    ssl_certificate_key ssl/pwm.local.key;
-    ssl_client_certificate ssl/ca-chain.crt;
+    ssl_certificate ssl/certs/root.crt;
+    ssl_certificate_key ssl/private/root.key;
+    ssl_client_certificate ssl/certs/root.crt;
     ssl_verify_client on;
     ssl_verify_depth 2;
 
