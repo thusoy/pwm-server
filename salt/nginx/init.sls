@@ -12,6 +12,7 @@ nginx:
             - user: nginx
         - watch:
             - file: nginx-config
+            - file: nginx-sites-enabled
 
     user.present:
         - system: True

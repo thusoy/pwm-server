@@ -14,7 +14,7 @@ server {
     ssl_certificate ssl/certs/root.crt;
     ssl_certificate_key ssl/private/root.key;
     ssl_client_certificate ssl/certs/root.crt;
-    ssl_verify_client on;
+    ssl_verify_client optional;
     ssl_verify_depth 2;
 
     location / {
