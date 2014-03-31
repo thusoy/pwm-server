@@ -18,6 +18,11 @@ python-dev:
     pkg.installed
 
 
+pyopenssl-reqs:
+    pkg.installed:
+        - name: libffi-dev
+
+
 pwm-server-virtualenv:
     virtualenv.managed:
         - name: /srv/pwm-server/venv
