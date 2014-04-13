@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>pwm-server</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
+
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <h1>pwm-server</h1>
+
+        <p>
+            Search for domains to generate salts for here:
+        </p>
+
+        <form action="{{ url_for('.domain_search') }}" method="get">
+            <input type="text" name="q" placeholder="domain">
+            <input type="submit" value="Search">
+        </form>
+
+        <h2>New domain</h2>
+
+        <form action="{{ url_for('.new_domain') }}" method="post">
+            <label for="name">Name: </label>
+            <input type="text" id="name" name="name" placeholder="name">
+            <label for="username">Username: </label>
+            <input type="text" id="username" name="username">
+            <label for="alphabet">Alphabet: </label>
+            <input type="text" id="alphabet" name="alphabet" placeholder="alphabet" value="full">
+            <label for="length">Key length: </label>
+            <input type="number" id="length" name="length" value="16">
+            <input type="submit" value="New domain">
+        </form>
+
+    </body>
+</html>

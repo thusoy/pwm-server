@@ -39,3 +39,25 @@ class SaltFetchTest(unittest.TestCase):
         self.assertEqual(len(json_response['domains']), 1)
         self.assertTrue(json_response['domains'][0]['name'], 'example.com')
 
+
+    def test_create_domain(self):
+        data = {
+            'name': 'facebook.com',
+            'alphabet': 'full',
+            'length': 16,
+        }
+        response = self.client.post('/domains', data=data)
+        self.assertEqual(response.status_code, 201)
+        with self.app.app_context():
+            domains = db.session.query(Domain).all()
+            self.assertEqual(len(domains), 2)
+
+
+    def test_create_invalid_domain(self):
+        data = {
+            'name': 'facebook.com',
+            # Must specify alphabet
+            # Must specify key length
+        }
+        response = self.client.post('/domains', data=data)
+        self.assertEqual(response.status_code, 400)
