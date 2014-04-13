@@ -1,6 +1,7 @@
 from . import db
 from .models import Certificate, CertificateForm
 
+import base64
 from flask import Blueprint, jsonify, render_template, request, url_for
 from logging import getLogger
 from pwm import Domain
@@ -23,7 +24,7 @@ def domain_search():
     domains = db.session.query(Domain).filter(Domain.name.ilike('%%%s%%' % domain_query)).all()
     return jsonify({'domains': [
         {
-        'salt': d.salt,
+        'salt': base64.b64encode(d.salt),
         'name': d.name,
         'charset': d.charset,
         'username': d.username,
@@ -52,10 +53,11 @@ def new_domain():
             'msg': 'New domain added succesfully',
             'domain': {
                 'name': domain.name,
-                'salt': domain.salt,
+                'salt': base64.b64encode(domain.salt),
             }
         }), 201
     except:
+        _logger.exception('Exception occured during new domain creation')
         return jsonify({
             'msg': 'Did not validate',
         }), 400

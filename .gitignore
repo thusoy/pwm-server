@@ -39,4 +39,5 @@ nosetests.xml
 venv
 devdb.sqlite
 .vagrant
+node_modules
 cover

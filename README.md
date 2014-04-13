@@ -93,6 +93,19 @@ self-signed CA, until that is confirmed lighttpd is put on hold.
 <sup>2</sup>: Apache support will be added soon. Note that it might still work, we just haven't
 tested it yet. Pull requests welcome! 
 
+To run the javascript tests, you need [gulp]. Make sure you have node installed and do
+
+    $ npm install -g gulp
+
+To install gulp globally. Then install our plugins:
+
+    $ npm install
+
+Run the tests:
+
+    $ gulp
+
+
 ### Vagrant tips
 
 Instead of running `vagrant provision` every time you change something in the config, instead of

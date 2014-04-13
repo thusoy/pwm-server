@@ -1,0 +1,14 @@
+{
+  "name": "pwm-server",
+  "description": "Backend for the pwm password manager",
+  "version": "0.1.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thusoy/pwm-server.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.6.0",
+    "gulp-nodeunit": "0.0.5"
+  }
+}

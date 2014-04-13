@@ -23,10 +23,13 @@
             Search for domains to generate salts for here:
         </p>
 
-        <form action="{{ url_for('.domain_search') }}" method="get">
-            <input type="text" name="q" placeholder="domain">
-            <input type="submit" value="Search">
+        <form action="{{ url_for('.domain_search') }}" method="get" class="domain-search">
+            <label for="search">Search: </label>
+            <input type="text" id="search" name="q" placeholder="domain">
         </form>
+
+        <div class="search-results">
+        </div>
 
         <h2>New domain</h2>
 
@@ -43,4 +46,8 @@
         </form>
 
     </body>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='scrypt.js') }}"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </html>
