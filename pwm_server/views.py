@@ -75,7 +75,7 @@ def new_csr():
             'href': url_for('.get_certificate', certificate_id=cert.id),
         }), 202
     else:
-        _logger.warning('Got invalid CSR from %s', request.access_route)
+        _logger.warning('Got invalid CSR from %s', ' -> '.join(request.access_route))
         return jsonify({
             'msg': 'Invalid CSR',
             'errors': form.errors,
