@@ -19,6 +19,8 @@ server {
 
     location / {
         proxy_pass http://127.0.0.1:8848;
+        proxy_set_header X-SSL-Verified $ssl_client_verify;
+        proxy_set_header X-SSL-Cert-Serial $ssl_client_serial;
         include proxy_params;
     }
 }
