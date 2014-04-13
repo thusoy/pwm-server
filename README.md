@@ -1,4 +1,4 @@
-pwm-server
+pwm-server [![Build Status](https://travis-ci.org/thusoy/pwm-server.svg)](https://travis-ci.org/thusoy/pwm-server)
 ==========
 
 A lightweight backend for [pwm] you can host yourself.
