@@ -10,7 +10,7 @@ install:
   - npm install
 
 script:
-  - nosetests --with-coverage --cover-html --cover-package=pwm_server --cover-branches
+  - nosetests --with-coverage --cover-html --cover-package=pwm_server --cover-branches pwm_server
   - ./node_modules/.bin/gulp
 
 after_success:
