@@ -28,9 +28,8 @@ pwm-server:
         - name: /srv/pwm-server/venv
 
     pip.installed:
-        - name: /vagrant
+        - editable: /vagrant
         - upgrade: True
-        - editable: True
         - bin_env: /srv/pwm-server/venv
         - require:
             - virtualenv: pwm-server
