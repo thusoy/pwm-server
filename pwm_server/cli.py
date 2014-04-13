@@ -27,6 +27,10 @@ def parse_args():
         metavar='<config-file>',
         help='Location of config file to use.',
     )
+    argparser.add_argument('-l', '--log-file',
+        metavar='<log-file>',
+        help='Log to this file',
+    )
     argparser.add_argument('-v', '--verbose',
         action='store_true',
         help='Increase verbosity',
@@ -44,7 +48,7 @@ def serve():
     Bootstrap a new database first if necessary, then start the webserver.
     """
     args = parse_args()
-    _init_logging(args.verbose)
+    _init_logging(verbose=args.verbose, log_file=args.log_file)
     app = create_app(args.config_file)
     with app.app_context():
         pwm = PWM()
@@ -52,7 +56,7 @@ def serve():
     app.run(debug=args.debug, host=args.host, port=args.port)
 
 
-def _init_logging(verbose=False):
+def _init_logging(verbose=False, log_file=None):
     """ Configure loggers. """
     level = logging.DEBUG if verbose else logging.WARNING
     sysout_handler = logging.StreamHandler(sys.stdout)
@@ -64,3 +68,7 @@ def _init_logging(verbose=False):
     pwm_server_logger = logging.getLogger('pwm_server')
     pwm_server_logger.setLevel(level)
     pwm_server_logger.addHandler(sysout_handler)
+    if log_file:
+        logfile_handler = logging.FileHandler(log_file)
+        logfile_handler.setLevel(level)
+        pwm_server_logger.addHandler(logfile_handler)
