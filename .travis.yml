@@ -13,10 +13,11 @@ install:
   - curl -L http://bootstrap.saltstack.org | sudo sh -s --
   - sudo cp salt/minion /etc/salt/minion
   - sudo salt-call state.highstate
+  - sudo sh -c "echo "127.0.0.1 pwm.local" >> /etc/hosts"
 
 script:
   - nosetests pwm_server --with-coverage --cover-html --cover-package=pwm_server --cover-branches
-  - nosetests integration_tests
+  - PWM_SERVER_TEST_URI=https://pwm.local:443 nosetests integration_tests
 
 after_success:
   # Only deploy once
