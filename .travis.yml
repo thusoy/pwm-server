@@ -12,6 +12,7 @@ install:
   # Integration test deps:
   - curl -L http://bootstrap.saltstack.org | sudo sh -s --
   - sudo cp salt/minion /etc/salt/minion
+  - sudo cp -r salt /srv/
   - sudo salt-call state.highstate
   - sudo sh -c "echo "127.0.0.1 pwm.local" >> /etc/hosts"
 
