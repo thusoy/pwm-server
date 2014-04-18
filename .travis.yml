@@ -13,11 +13,12 @@ install:
   - curl -L http://bootstrap.saltstack.org | sudo sh -s --
   - sudo cp salt/minion /etc/salt/minion
   - sudo cp -r salt /srv/
-  - sudo salt-call state.highstate
-  - echo "127.0.0.1 pwm.local" | sudo tee /etc/hosts
 
   # Outer quotes needed to avoid yaml misparsing due to the colon
   - 'echo -e "source_location: $TRAVIS_BUILD_DIR" | sudo tee /etc/salt/grains'
+
+  - sudo salt-call state.highstate
+  - echo "127.0.0.1 pwm.local" | sudo tee /etc/hosts
 
 script:
   - nosetests pwm_server --with-coverage --cover-html --cover-package=pwm_server --cover-branches
