@@ -6,12 +6,21 @@ python:
   - "3.3"
 
 install:
+  # Python unit tests deps:
   - pip install -e .[test]
+
+  # JS deps:
   - npm install
 
+  # Integration test deps:
+  - curl -L http://bootstrap.saltstack.org | sudo sh -s --
+  - sudo cp salt/minion /etc/salt/minion
+  - sudo salt-call state.highstate
+
 script:
-  - nosetests --with-coverage --cover-html --cover-package=pwm_server --cover-branches
+  - nosetests pwm_server --with-coverage --cover-html --cover-package=pwm_server --cover-branches
   - ./node_modules/.bin/gulp
+  - nosetests integration_tests
 
 after_success:
   # Only deploy once
