@@ -2,16 +2,10 @@ pip:
     pkg.installed:
         - name: python-pip
 
-    pip.installed:
-        - upgrade: True
-        - require:
-            - pkg: pip
-
-
 virtualenv:
     pip.installed:
         - require:
-            - pip: pip
+            - pkg: pip
 
 
 python-dev:
@@ -26,14 +20,17 @@ pyopenssl-reqs:
 pwm-server:
     virtualenv.managed:
         - name: /srv/pwm-server/venv
+        - require:
+            - pip: virtualenv
 
     pip.installed:
-        - editable: /vagrant
+        - editable: {{ grains.get('source_location', '/vagrant') }}
         - upgrade: True
         - bin_env: /srv/pwm-server/venv
         - require:
             - virtualenv: pwm-server
             - pkg: python-dev
+            - pkg: python-pip
 
     file.managed:
         - name: /srv/pwm-server/config.py
